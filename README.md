@@ -14,7 +14,7 @@ Replace `<router-view/>` with `<router-multi-view/>` to keep the DOM of the deac
 
 <br>
 
-<img src="https://raw.githubusercontent.com/Akryum/vue-router-multi-view/master/dom.png?token=ACqyfMu4tI7kW7O7iJhrPyiYgNr6P1cTks5aHqpJwA%3D%3D" />
+<img src="https://raw.githubusercontent.com/Akryum/vue-router-multi-view/master/devtool.png?token=ACqyfDURGLlC0Gyb0z5xWHOUJCjZhbmYks5aHs85wA%3D%3D" />
 
 <br>
 
