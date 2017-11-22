@@ -1,12 +1,10 @@
-<h1 align="center">vue-router-multi-view</h1>
+<h1>vue-router-multi-view</h1>
 
-<p align="center">
+<p>
 <a href="https://www.npmjs.com/package/vue-router-multi-view"><img src="https://img.shields.io/npm/v/vue-router-multi-view.svg"/> <img src="https://img.shields.io/npm/dm/vue-router-multi-view.svg"/></a> <a href="https://vuejs.org/"><img src="https://img.shields.io/badge/vue-2.x-brightgreen.svg"/></a>
 </p>
 
-<p align="center">
 Replace `<router-view/>` with `<router-multi-view/>` to keep the DOM of the deactivated route alive.
-</p>
 
 <br>
 
