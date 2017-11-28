@@ -1,6 +1,6 @@
 {
   "name": "vue-router-multi-view",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "router-view meet v-show meet keep-alive",
   "main": "dist/vue-router-multi-view.umd.js",
   "module": "dist/vue-router-multi-view.esm.js",

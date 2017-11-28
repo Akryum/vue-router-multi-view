@@ -4,6 +4,60 @@ function warn(condition, message) {
   }
 }
 
+var hasConsole = typeof console !== 'undefined';
+
+function warn$1(msg, vm) {
+  var trace = '';
+  if (Vue.config.warnHandler) {
+    Vue.config.warnHandler.call(null, msg, vm, trace);
+  } else if (hasConsole && !Vue.config.silent) {
+    console.error('[Vue warn]: ' + msg + trace);
+  }
+}
+
+function handleError(err, vm, info) {
+  if (vm) {
+    var cur = vm;
+    while (cur = cur.$parent) {
+      var hooks = cur.$options.errorCaptured;
+      if (hooks) {
+        for (var i = 0; i < hooks.length; i++) {
+          try {
+            var capture = hooks[i].call(cur, err, vm, info) === false;
+            if (capture) return;
+          } catch (e) {
+            globalHandleError(e, cur, 'errorCaptured hook');
+          }
+        }
+      }
+    }
+  }
+  globalHandleError(err, vm, info);
+}
+
+function globalHandleError(err, vm, info) {
+  if (Vue.config.errorHandler) {
+    try {
+      return Vue.config.errorHandler.call(null, err, vm, info);
+    } catch (e) {
+      logError(e, null, 'config.errorHandler');
+    }
+  }
+  logError(err, vm, info);
+}
+
+function logError(err, vm, info) {
+  if (process.env.NODE_ENV !== 'production') {
+    warn$1('Error in ' + info + ': "' + err.toString() + '"', vm);
+  }
+  /* istanbul ignore else */
+  if (hasConsole) {
+    console.error(err);
+  } else {
+    throw err;
+  }
+}
+
 function isInInactiveTree(vm) {
   while (vm && (vm = vm.$parent)) {
     if (vm._inactive) return true;
@@ -432,28 +486,32 @@ function extend(to, from) {
   return to;
 }
 
-function install(Vue) {
-	if (install.installed) return;
-	install.installed = true;
+var Vue = void 0;
 
-	Vue.component('router-multi-view', MultiView);
+function install(pVue) {
+  if (install.installed) return;
+  install.installed = true;
+
+  Vue = pVue;
+
+  Vue.component('router-multi-view', MultiView);
 }
 
 var RouterMultiView = MultiView;
 
 var plugin = {
-	install: install
+  install: install
 
-	// Auto-install
+  // Auto-install
 };var GlobalVue = null;
 if (typeof window !== 'undefined') {
-	GlobalVue = window.Vue;
+  GlobalVue = window.Vue;
 } else if (typeof global !== 'undefined') {
-	GlobalVue = global.Vue;
+  GlobalVue = global.Vue;
 }
 if (GlobalVue) {
-	GlobalVue.use(plugin);
+  GlobalVue.use(plugin);
 }
 
-export { install, RouterMultiView };
+export { Vue, install, RouterMultiView };
 export default plugin;
