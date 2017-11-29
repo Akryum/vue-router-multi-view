@@ -409,7 +409,7 @@ var MultiView = {
             'data-route-name': cached.name,
             'data-is-active': isCurrent ? true : null
           },
-          keepAlive: !isCurrent,
+          keepAlive: true,
           directives: [{
             name: 'show',
             value: isCurrent
@@ -456,12 +456,7 @@ var MultiView = {
 
         cached.data = _data;
 
-        finalChildren.push(h({
-          extends: cached.component,
-          created: function created() {
-            updateActive(isCurrent, cached, this);
-          }
-        }, _data));
+        finalChildren.push(h(cached.component, _data));
       }
     });
 
