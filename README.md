@@ -44,18 +44,16 @@ Or use the directives and components directly:
 
 ```javascript
 import Vue from 'vue'
-import { VueRouterMultiView, VPopover } from 'vue-router-multi-view'
+import { VueRouterMultiView } from 'vue-router-multi-view'
 
-Vue.directive('tooltip', VueRouterMultiView)
-Vue.component('v-popover', VPopover)
+Vue.directive('router-multi-view', VueRouterMultiView)
 ```
 
 ## Browser
 
-Include [popper.js](https://popper.js.org/) with [vue-router-multi-view](/dist/vue-router-multi-view.min.js) in the page.
+Include [vue-router-multi-view](/dist/vue-router-multi-view.min.js) in the page.
 
 ```html
-<script src="https://unpkg.com/popper.js"></script>
 <script src="https://unpkg.com/vue-router-multi-view"></script>
 ```
 
@@ -72,6 +70,22 @@ Vue.use(VueRouterMultiView)
 Replace `<router-view/>` with `<router-multi-view/>` and replace the `name` prop by the `viewName` prop (this is to prevent potential conflicts with `<transition-group>`).
 
 **:warning: Contrary to `<router-view/>`, `<router-multi-view/>` will need to wrap the content with an element or component (default: `<div>`).**
+
+If you were using the [keep-alive](https://vuejs.org/v2/api/#keep-alive) component, you need to remove it. So if you had:
+
+```html
+<keep-alive>
+  <router-view />
+</keep-alive>
+```
+
+It should be replaced by:
+
+```html
+<router-multi-view />
+```
+
+`<router-multi-view />` already includes keep-alive and will trigger the `activated` and `deactivated` hooks on the children components.
 
 **:warning: It is recommended to use [props](https://router.vuejs.org/en/essentials/passing-props.html) for the routes.**
 
