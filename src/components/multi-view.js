@@ -99,7 +99,6 @@ export default {
           ],
         }
 
-
         if (isCurrent) {
           const matched = route.matched[depth]
 
@@ -114,8 +113,6 @@ export default {
             ) {
               matched.instances[name] = val
             }
-
-            updateActive(isCurrent, cached, vm)
           }
 
           // resolve props
@@ -145,14 +142,19 @@ export default {
 
         cached.data = data
 
-        finalChildren.push(h(cached.component, data))
+        finalChildren.push(h({
+          extends: cached.component,
+          created () {
+            updateActive(isCurrent, cached, this)
+          },
+        }, data))
       }
     })
 
     children && finalChildren.push(...children)
 
     return h(props.morph, data, finalChildren)
-  }
+  },
 }
 
 function resolveProps (route, config) {
