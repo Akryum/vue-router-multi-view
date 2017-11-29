@@ -7,12 +7,22 @@
 
 <script>
 export default {
+  data () {
+    return {
+      foo: 'bar',
+    }
+  },
+
+  created () {
+    console.log('Page A created')
+  },
+
   activated () {
-    console.log('Simple page activated')
+    console.log('Simple page activated', this.foo)
   },
 
   deactivated () {
-    console.log('Simple page deactivated')
+    console.log('Simple page deactivated', this.foo)
   },
 }
 </script>
