@@ -44,18 +44,16 @@ Or use the directives and components directly:
 
 ```javascript
 import Vue from 'vue'
-import { VueRouterMultiView, VPopover } from 'vue-router-multi-view'
+import { VueRouterMultiView } from 'vue-router-multi-view'
 
-Vue.directive('tooltip', VueRouterMultiView)
-Vue.component('v-popover', VPopover)
+Vue.directive('router-multi-view', VueRouterMultiView)
 ```
 
 ## Browser
 
-Include [popper.js](https://popper.js.org/) with [vue-router-multi-view](/dist/vue-router-multi-view.min.js) in the page.
+Include [vue-router-multi-view](/dist/vue-router-multi-view.min.js) in the page.
 
 ```html
-<script src="https://unpkg.com/popper.js"></script>
 <script src="https://unpkg.com/vue-router-multi-view"></script>
 ```
 
