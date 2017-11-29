@@ -90,7 +90,7 @@ export default {
             'data-route-name': cached.name,
             'data-is-active': isCurrent ? true : null,
           },
-          keepAlive: !isCurrent,
+          keepAlive: true,
           directives: [
             {
               name: 'show',
@@ -142,12 +142,7 @@ export default {
 
         cached.data = data
 
-        finalChildren.push(h({
-          extends: cached.component,
-          created () {
-            updateActive(isCurrent, cached, this)
-          },
-        }, data))
+        finalChildren.push(h(cached.component, data))
       }
     })
 
