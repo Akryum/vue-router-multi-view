@@ -421,8 +421,6 @@ var MultiView = {
             if (val && current !== vm || !val && current === vm) {
               _matched.instances[name] = val;
             }
-
-            updateActive(isCurrent, cached, vm);
           };
 
           // resolve props
@@ -452,7 +450,12 @@ var MultiView = {
 
         cached.data = _data;
 
-        finalChildren.push(h(cached.component, _data));
+        finalChildren.push(h({
+          extends: cached.component,
+          created: function created() {
+            updateActive(isCurrent, cached, this);
+          }
+        }, _data));
       }
     });
 
