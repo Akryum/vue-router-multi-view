@@ -71,6 +71,22 @@ Replace `<router-view/>` with `<router-multi-view/>` and replace the `name` prop
 
 **:warning: Contrary to `<router-view/>`, `<router-multi-view/>` will need to wrap the content with an element or component (default: `<div>`).**
 
+If you were using the [keep-alive](https://vuejs.org/v2/api/#keep-alive) component, you need to remove it. So if you had:
+
+```html
+<keep-alive>
+  <router-view />
+</keep-alive>
+```
+
+It should be replaced by:
+
+```html
+<router-multi-view />
+```
+
+`<router-multi-view />` already includes keep-alive and will trigger the `activated` and `deactivated` hooks on the children components.
+
 **:warning: It is recommended to use [props](https://router.vuejs.org/en/essentials/passing-props.html) for the routes.**
 
 Example:
