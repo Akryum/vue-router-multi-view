@@ -4,6 +4,14 @@
 <a href="https://www.npmjs.com/package/vue-router-multi-view"><img src="https://img.shields.io/npm/v/vue-router-multi-view.svg"/> <img src="https://img.shields.io/npm/dm/vue-router-multi-view.svg"/></a> <a href="https://vuejs.org/"><img src="https://img.shields.io/badge/vue-2.x-brightgreen.svg"/></a>
 </p>
 
+<p>
+  <a href="https://www.patreon.com/akryum" target="_blank">
+    <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patreon">
+  </a>
+</p>
+
+<br>
+
 Replace `<router-view/>` with `<router-multi-view/>` to keep the DOM of the deactivated route alive.
 
 <br>
