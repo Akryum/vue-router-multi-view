@@ -447,12 +447,28 @@ var MultiView = {
 
         // also register instance in prepatch hook
         // in case the same component instance is reused across different routes
-        (_data.hook || (_data.hook = {})).prepatch = function (_, vnode) {
+        // (and prevent override of prepatch hook)
+        var hook = _extends({}, _data.hook || {}, {
+          _prepatch: null
+        });
+        _data.hook = hook;
+        var originalPrepatch = hook.prepatch;
+        var prepatch = function prepatch(oldVnode, vnode) {
+          originalPrepatch && originalPrepatch(oldVnode, vnode);
+          hook._prepatch && hook._prepatch(oldVnode, vnode);
           if (isCurrent) {
             matched.instances[name] = vnode.componentInstance;
           }
           updateActive(isCurrent, cached, vnode.componentInstance);
         };
+        Object.defineProperty(hook, 'prepatch', {
+          get: function get$$1() {
+            return prepatch;
+          },
+          set: function set$$1(value) {
+            return hook._prepatch = value;
+          }
+        });
 
         cached.data = _data;
 
