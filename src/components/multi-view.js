@@ -133,12 +133,25 @@ export default {
 
         // also register instance in prepatch hook
         // in case the same component instance is reused across different routes
-        ;(data.hook || (data.hook = {})).prepatch = (_, vnode) => {
+        // (and prevent override of prepatch hook)
+        const hook = {
+          ...data.hook || {},
+          _prepatch: null,
+        }
+        data.hook = hook
+        const originalPrepatch = hook.prepatch
+        const prepatch = (oldVnode, vnode) => {
+          originalPrepatch && originalPrepatch(oldVnode, vnode)
+          hook._prepatch && hook._prepatch(oldVnode, vnode)
           if (isCurrent) {
             matched.instances[name] = vnode.componentInstance
           }
           updateActive(isCurrent, cached, vnode.componentInstance)
         }
+        Object.defineProperty(hook, 'prepatch', {
+          get: () => prepatch,
+          set: value => hook._prepatch = value,
+        })
 
         cached.data = data
 
