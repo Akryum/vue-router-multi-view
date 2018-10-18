@@ -22,6 +22,8 @@
 
 <br>
 
+## About
+
 Replace `<router-view/>` with `<router-multi-view/>` to keep the DOM of the deactivated route alive.
 
 <br>
