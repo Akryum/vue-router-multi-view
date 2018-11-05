@@ -80,7 +80,10 @@ export default {
     const matched = route.matched[depth]
     if (matched) {
       // Get effective route (with instantiated url params) as key
-      const key = getEffectiveRoute(matched.path, route)
+      let key = matched.path
+      if (props.forceMultiViews) {
+        key = getEffectiveRoute(matched.path, route)
+      }
       const cache = bigCache[key] || (bigCache[key] = {})
 
       // render previous view if the tree is inactive and kept-alive
