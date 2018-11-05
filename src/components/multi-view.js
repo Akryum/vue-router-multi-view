@@ -15,6 +15,25 @@ function updateActive (isCurrent, cached, vm) {
   }
 }
 
+function getEffectiveRoute(key, currentRoute) {
+  let effectiveRoute = key;
+  const tokensRegex = /.*:([a-zA-Z0-9]+)\/?.*/g;
+  const matchedTokens = tokensRegex.exec(key);
+  const queryParamsName =
+    matchedTokens && matchedTokens.length && matchedTokens.length > 1
+      ? matchedTokens.slice(1)
+      : [];
+  queryParamsName.forEach(paramName => {
+    if (currentRoute.params && currentRoute.params[paramName]) {
+      effectiveRoute = effectiveRoute.replace(
+        new RegExp(`:${paramName}`, "g"),
+        currentRoute.params[paramName]
+      );
+    }
+  });
+  return effectiveRoute;
+}
+
 export default {
   name: 'RouterView',
   functional: true,
@@ -55,7 +74,7 @@ export default {
 
     const matched = route.matched[depth]
     if (matched) {
-      const key = matched.path
+      const key = getEffectiveRoute(matched.path, route)
       const cache = bigCache[key] || (bigCache[key] = {})
 
       // render previous view if the tree is inactive and kept-alive
