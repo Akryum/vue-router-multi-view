@@ -17,6 +17,7 @@ function updateActive (isCurrent, cached, vm) {
 
 function getEffectiveRoute(key, currentRoute) {
   let effectiveRoute = key;
+  // Fetch url params names
   const tokensRegex = /.*:([a-zA-Z0-9]+)\/?.*/g;
   const matchedTokens = tokensRegex.exec(key);
   const queryParamsName =
@@ -74,6 +75,7 @@ export default {
 
     const matched = route.matched[depth]
     if (matched) {
+      // Get effective route (with instantiated url params) as key
       const key = getEffectiveRoute(matched.path, route)
       const cache = bigCache[key] || (bigCache[key] = {})
 
