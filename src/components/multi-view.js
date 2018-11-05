@@ -47,6 +47,10 @@ export default {
       type: [String, Object, Function],
       default: 'div',
     },
+    forceMultiViews: {
+      type: Boolean,
+      default: false,
+    },
   },
   render (_, { props, parent, data, children }) {
     // directly use parent context's createElement() function
