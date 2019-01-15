@@ -136,22 +136,17 @@ export default {
         // (and prevent override of prepatch hook)
         const hook = {
           ...data.hook || {},
-          _prepatch: null,
         }
         data.hook = hook
         const originalPrepatch = hook.prepatch
         const prepatch = (oldVnode, vnode) => {
           originalPrepatch && originalPrepatch(oldVnode, vnode)
-          hook._prepatch && hook._prepatch(oldVnode, vnode)
           if (isCurrent) {
             matched.instances[name] = vnode.componentInstance
           }
           updateActive(isCurrent, cached, vnode.componentInstance)
         }
-        Object.defineProperty(hook, 'prepatch', {
-          get: () => prepatch,
-          set: value => hook._prepatch = value,
-        })
+        hook.prepatch = prepatch
 
         cached.data = data
 
