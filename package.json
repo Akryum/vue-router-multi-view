@@ -1,6 +1,6 @@
 {
   "name": "vue-router-multi-view",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "router-view meet v-show meet keep-alive",
   "main": "dist/vue-router-multi-view.umd.js",
   "module": "dist/vue-router-multi-view.esm.js",
@@ -52,5 +52,8 @@
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-plugin-vue": "^2.4.1",
     "uglify-es": "^3.0.28"
+  },
+  "peerDependencies": {
+    "vue": "^2.5.18"
   }
 }
