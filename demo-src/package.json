@@ -17,7 +17,7 @@
   "dependencies": {
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
-    "vue": "^2.4.4",
+    "vue": "^2.5.18",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
@@ -37,7 +37,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "file-loader": "^1.1.4",
     "vue-loader": "^14.0.0",
-    "vue-template-compiler": "^2.4.4",
+    "vue-template-compiler": "^2.5.18",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
   }
