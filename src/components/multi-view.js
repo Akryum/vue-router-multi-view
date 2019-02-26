@@ -19,6 +19,10 @@ export default {
   name: 'RouterView',
   functional: true,
   props: {
+    altKey: {
+      type: String,
+      default: null,
+    },
     viewName: {
       type: String,
       default: 'default',
@@ -55,7 +59,7 @@ export default {
 
     const matched = route.matched[depth]
     if (matched) {
-      const key = matched.path
+      const key = props.altKey || matched.path
       const cache = bigCache[key] || (bigCache[key] = {})
 
       // render previous view if the tree is inactive and kept-alive
