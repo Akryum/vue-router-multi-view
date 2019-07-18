@@ -186,3 +186,16 @@ To use transition, you need to use the `viewName` prop to set the name of the vi
 ```
 
 Here `view-name` and `morph` are `<router-multi-view/>` props, while `tag` and `name` are `<transition-group>` props.
+
+To render multi views for parameterized route (such as /a/b/:aParam), 
+you can use the `forceMultiViews` option globally :
+```javascript
+Vue.use(VueRouterMultiView, { forceMultiViews: true });
+```
+
+or locally :
+```html
+<router-multi-view
+  :force-multi-views="true"
+/>
+```

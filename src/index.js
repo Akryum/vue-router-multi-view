@@ -2,11 +2,13 @@ import MultiView from './components/multi-view'
 
 export let Vue
 
-export function install (pVue) {
+export function install (pVue, options = { forceMultiViews: false }) {
   if (install.installed) return
   install.installed = true
 
   Vue = pVue
+
+  MultiView.props.forceMultiViews.default = options.forceMultiViews;
 
   Vue.component('router-multi-view', MultiView)
 }
